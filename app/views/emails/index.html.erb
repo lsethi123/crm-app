@@ -1,0 +1,70 @@
+<h4>Listing Emails for Customer <%=@customer.name%></h4>
+
+<%= link_to  new_email_path(customer_id:@customer.id) ,:class=>"pull-right btn-padding btn btn-success" do%>
+<span class="glyphicon glyphicon-envelope"></span> New Email
+<%end%>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @emails.each do |email| %>
+      <tr>
+        <td><%= email.email %></td>
+        <!--<td><%= link_to 'Show', email %></td>-->
+        <td>
+          <%= link_to edit_email_path(email),:title=>"Edit" do%>
+            <span class="glyphicon glyphicon-edit"></span>
+          <%end%>
+        </td>
+        <td>
+          <%= link_to email, method: :delete, data: { confirm: 'Are you sure?' },:title=>"Delete" do%>
+            <span class="glyphicon glyphicon-trash"></span>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<h4>Listing notes for Customer <%=@customer.name%></h4>
+
+<%= link_to  new_note_path(customer_id:@customer.id) ,:class=>"pull-right btn btn-success btn-padding" do%>
+<span class="glyphicon glyphicon-envelope"></span> New Note
+<%end%>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Note</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @notes.each do |note| %>
+      <tr>
+        <td><%= note.note %></td>
+        <!--<td><%= link_to 'Show', note %></td>-->
+        <td>
+          <%= link_to edit_note_path(note),:title=>"Edit" do%>
+            <span class="glyphicon glyphicon-edit"></span>
+          <%end%>
+        </td>
+        <td>
+          <%= link_to note, method: :delete, data: { confirm: 'Are you sure?' },:title=>"Delete" do%>
+            <span class="glyphicon glyphicon-trash"></span>
+          <%end%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+

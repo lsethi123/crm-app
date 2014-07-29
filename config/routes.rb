@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  root to: 'visitors#index'
+  resources :notes
+
+  resources :emails
+
+  resources :customers
+
+  root to: 'customers#index'
   devise_for :users
   resources :users
 end

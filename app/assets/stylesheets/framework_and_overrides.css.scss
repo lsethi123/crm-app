@@ -34,10 +34,10 @@ img {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  background-color: #FFF;
   padding-bottom: 80px;
   width: 100%;
-  margin-top: 51px; // accommodate the navbar
+  margin-top: 55px; // accommodate the navbar
   }
 section {
   @extend .row;
@@ -78,4 +78,11 @@ section {
   @extend .btn;
   @extend .btn-primary;
   @extend .btn-xs;
+}
+
+.row-padding{
+  padding-top: 52px;
+}
+.btn-padding{
+  margin-bottom:10px;
 }

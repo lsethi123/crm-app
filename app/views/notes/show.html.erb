@@ -1,0 +1,15 @@
+
+<p>
+  <strong>Note:</strong>
+  <%= @note.note %>
+</p>
+
+<p>
+  <strong>Customer Name:</strong>
+  <%= @note.customer.name %>
+</p>
+
+
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', emails_path(customer_id:@note.customer_id) %>

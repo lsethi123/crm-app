@@ -9,12 +9,12 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <header>
       <%= render 'layouts/navigation' %>
-    </header>
-    <main role="main">
-       <%= render 'layouts/messages' %>
-       <%= yield %>
-    </main>
+      <%= render 'layouts/messages' %>
+        <div class="col-sm-9">
+         <%= yield %>
+        </div>
+      </div> 
+      
   </body>
 </html>
