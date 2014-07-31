@@ -1,0 +1,16 @@
+<%= simple_form_for(@contact) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-group">
+    <%= f.input :name %>
+    <%= f.input :company %>
+    <%= f.input :phone %>
+    <%= f.input :email %>
+    <%= f.association :customer %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit ,:class=>"btn btn-primary"%>
+    <%= link_to 'Back', customers_path ,:class=>"btn btn-primary" %>
+  </div>
+<% end %>

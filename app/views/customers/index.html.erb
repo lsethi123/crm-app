@@ -1,15 +1,37 @@
 
 <%-if user_signed_in?%>
-<h4>Listing customers</h4>
 
-
-<%= link_to  new_customer_path, :class=>"btn btn-success btn-padding pull-right" do%>
-<span class="glyphicon glyphicon-user"></span> New Customer
+<div class="top-padding-10">
+  <span>
+    <%= link_to  new_customer_path, :class=>"btn btn-success btn-padding" do%>
+    <span class="glyphicon glyphicon-user"></span> New Customer
+    <%end%>
+  </span>
+<span>
+    <%= link_to  new_contact_path, :class=>"btn btn-success btn-padding" do%>
+    <span class="glyphicon glyphicon-earphone"></span> New Contact
+    <%end%>
+  </span>
+<span>
+  <%= link_to  new_email_path ,:class=>"btn-padding btn btn-success" do%>
+<span class="glyphicon glyphicon-envelope"></span> New Email
 <%end%>
-  
+</span>
+<span>
+  <%= link_to  new_note_path ,:class=>" btn btn-success btn-padding" do%>
+<span class="glyphicon glyphicon-comment"></span> New Note
+<%end%>
+</span>
+</div>
   
 <table class="table table-bordered table-striped">
   <thead>
+    <tr >
+        <td colspan="5" class="active">
+          <strong>Contacts</strong>
+        </td>
+
+      </tr>
     <tr>
       <th>Name</th>
       <th>Address</th>

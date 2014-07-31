@@ -5,6 +5,7 @@ class EmailsController < ApplicationController
   # GET /emails.json
   def index
     @customer = Customer.select("id,name").find(params['customer_id'])
+    @contacts = Contact.all.where(customer_id:@customer.id)
     @emails = Email.all.where(customer_id:@customer.id)
     @notes = Note.all.where(customer_id:@customer.id)
   end
@@ -32,7 +33,7 @@ class EmailsController < ApplicationController
     pp @email
     respond_to do |format|
       if @email.save
-        format.html { redirect_to emails_url(customer_id:@email.customer_id), notice: 'Email was successfully created.' }
+        format.html { redirect_to customers_url, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
         format.html { render :new }

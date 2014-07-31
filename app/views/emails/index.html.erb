@@ -1,13 +1,53 @@
-<h4>Listing Emails for Customer <%=@customer.name%></h4>
+<div class="breadcrumbs col-sm-12" id="breadcrumbs">
 
-<%= link_to  new_email_path(customer_id:@customer.id) ,:class=>"pull-right btn-padding btn btn-success" do%>
-<span class="glyphicon glyphicon-envelope"></span> New Email
-<%end%>
+          <ul class="breadcrumb">
+            <li>
+              <i class="glyphicon glyphicon-home"></i>
+              <%= link_to 'Home', customers_path %>
+            </li>
+            <li class="active"><%=@customer.name%></li>
+
+          </ul>
+</div>
+<div class="col-sm-7">
+  <!--<h4>Listing Contact for Customer <%=@customer.name%></h4>-->
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr >
+        <td colspan="4" class="active">
+          <strong>Contacts</strong>
+        </td>
+      <tr>
+      <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Phone</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @contacts.each do |contact| %>
+        <tr>
+          <td><%= contact.name %></td>
+          <td><%= contact.company %></td>
+          <td><%= contact.phone %></td>
+          <td><%= contact.email %></td>
+          <!--<td><%= link_to 'Show', contact %></td>
+          <td><%= link_to 'Edit', edit_contact_path(contact) %></td>
+          <td><%= link_to 'Destroy', contact, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="col-sm-4">
 <table class="table table-bordered table-striped">
   <thead>
-    <tr>
+
+    <tr class="active">
       <th>Email</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -15,34 +55,18 @@
     <% @emails.each do |email| %>
       <tr>
         <td><%= email.email %></td>
-        <!--<td><%= link_to 'Show', email %></td>-->
-        <td>
-          <%= link_to edit_email_path(email),:title=>"Edit" do%>
-            <span class="glyphicon glyphicon-edit"></span>
-          <%end%>
-        </td>
-        <td>
-          <%= link_to email, method: :delete, data: { confirm: 'Are you sure?' },:title=>"Delete" do%>
-            <span class="glyphicon glyphicon-trash"></span>
-          <%end%>
-        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-<h4>Listing notes for Customer <%=@customer.name%></h4>
 
-<%= link_to  new_note_path(customer_id:@customer.id) ,:class=>"pull-right btn btn-success btn-padding" do%>
-<span class="glyphicon glyphicon-envelope"></span> New Note
-<%end%>
 
 <table class="table table-bordered table-striped">
   <thead>
-    <tr>
+    <tr class="active">
       <th>Note</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -51,16 +75,7 @@
       <tr>
         <td><%= note.note %></td>
         <!--<td><%= link_to 'Show', note %></td>-->
-        <td>
-          <%= link_to edit_note_path(note),:title=>"Edit" do%>
-            <span class="glyphicon glyphicon-edit"></span>
-          <%end%>
-        </td>
-        <td>
-          <%= link_to note, method: :delete, data: { confirm: 'Are you sure?' },:title=>"Delete" do%>
-            <span class="glyphicon glyphicon-trash"></span>
-          <%end%>
-        </td>
+        
       </tr>
     <% end %>
   </tbody>
@@ -68,3 +83,4 @@
 
 <br>
 
+</div>

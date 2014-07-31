@@ -1,13 +1,12 @@
-<%= simple_form_for(@email) do |f| %>
+<%= simple_form_for(@email,:class=>"form-horizontal") do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+  <div class="form-group">
     <%= f.input :email %>
-    <%= f.hidden_field :customer_id,:value=>@customer_id%>
+    <%= f.association :customer %>
   </div>
-  <br>
-  <div class="form-actions">
+  <div class="form-group">
     <%= f.button :submit ,:class=>"btn btn-primary"%>
-    <%= link_to 'Back', emails_path(customer_id:@customer_id),:class=>"btn btn-primary" %>
+    <%= link_to 'Back', customers_path,:class=>"btn btn-primary" %>
   </div>
 <% end %>

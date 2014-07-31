@@ -30,7 +30,7 @@ class NotesController < ApplicationController
 
     respond_to do |format|
       if @note.save
-        format.html { redirect_to emails_url(customer_id:@note.customer_id), notice: 'Note was successfully created.' }
+        format.html { redirect_to customers_url, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
         format.html { render :new }

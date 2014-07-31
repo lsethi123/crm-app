@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140728172935) do
+ActiveRecord::Schema.define(version: 20140731132849) do
+
+  create_table "contacts", force: true do |t|
+    t.string   "name"
+    t.string   "company"
+    t.string   "phone"
+    t.string   "email"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "contacts", ["customer_id"], name: "index_contacts_on_customer_id", using: :btree
 
   create_table "customers", force: true do |t|
     t.string   "name"
