@@ -30,9 +30,10 @@ class EmailsController < ApplicationController
   # POST /emails.json
   def create
     @email = Email.new(email_params)
-    pp @email
+    @email.contact_id = params['contact_id']
     respond_to do |format|
       if @email.save
+        CrmMailer.send_contact_mail(@email).deliver
         format.html { redirect_to customers_url, notice: 'Email was successfully created.' }
         format.json { render :show, status: :created, location: @email }
       else
@@ -68,7 +69,18 @@ class EmailsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  def contacts_by_customer
+    if params[:id].present?
+      @contacts = Customer.find(params[:id]).contacts
+    else
+      @contacts = []
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @contacts ,"success" => "true"}
+    end
+    
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_email
@@ -77,6 +89,6 @@ class EmailsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def email_params
-      params.require(:email).permit(:email,:customer_id)
+      params.require(:email).permit(:email,:customer_id,:subject,:message,:contact_id)
     end
 end

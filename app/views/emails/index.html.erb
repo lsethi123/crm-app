@@ -1,14 +1,4 @@
-<div class="breadcrumbs col-sm-12" id="breadcrumbs">
 
-          <ul class="breadcrumb">
-            <li>
-              <i class="glyphicon glyphicon-home"></i>
-              <%= link_to 'Home', customers_path %>
-            </li>
-            <li class="active"><%=@customer.name%></li>
-
-          </ul>
-</div>
 <div class="col-sm-7">
   <!--<h4>Listing Contact for Customer <%=@customer.name%></h4>-->
 
@@ -42,31 +32,51 @@
     </tbody>
   </table>
 </div>
+<script>
+$(document).ready(function(){
+  $('.header').click(function () {
+    var $this = $(this);
+    $(this).nextUntil('tr.header').slideToggle(100).promise().done(function () {
+        $this.find('span').text(function (_, value) {
+            return value == '+' ? '-' : '+'
+        });
+    });
+});
+});
+</script>
+
 <div class="col-sm-4">
+
 <table class="table table-bordered table-striped">
-  <thead>
-
-    <tr class="active">
-      <th>Email</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @emails.each do |email| %>
-      <tr>
-        <td><%= email.email %></td>
-      </tr>
-    <% end %>
-  </tbody>
+  <tr >
+    <td colspan="4" class="active">
+      <strong>Emails</strong>
+    </td>
+   <% @emails.each do |e| %>
+  <tr  class="header">
+    <td colspan="2" title="Click to Expand"><%-if !e.contact_id.nil? %><%= Contact.select("email").find(e.contact_id).email %><%end%></td>
+  </tr>
+  <tr  style="display:none">
+    <td><%=e.subject%></td>
+    <td><%=e.message%></td>
+  </tr>
+  <%end%>
 </table>
+
+
+
+
+
+
+
 
 <br>
 
 
 <table class="table table-bordered table-striped">
   <thead>
-    <tr class="active">
-      <th>Note</th>
+    <tr class=" widget-header-small">
+      <th><strong>Note</strong></th>
     </tr>
   </thead>
 

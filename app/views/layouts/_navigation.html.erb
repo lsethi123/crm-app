@@ -1,36 +1,509 @@
-<%# navigation styled for Bootstrap 3.0 %>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse pull-right">
-      <ul class="nav navbar-nav">
-        <%= render 'layouts/navigation_links' %>
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="row row-padding">
-    <div class="col-sm-3">
-      <div class="sidebar-nav">
-        <div class="navbar navbar-default" role="navigation">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <span class="visible-xs navbar-brand">Sidebar menu</span>
-          </div>
-          <div class="navbar-collapse collapse sidebar-navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><%= link_to 'Home', root_path %></li>
-              <li><%= link_to 'Calender', '#' %></li>
-              <li><%= link_to 'Customers', root_path %></li>
-              <li><%= link_to 'Prospects','#'  %></li>
-              <li><%= link_to 'Others', '#' %></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+
+    <!-- #section:basics/navbar.layout -->
+    <div id="navbar" class="navbar navbar-default">
+      <script type="text/javascript">
+        try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+      </script>
+
+      <div class="navbar-container" id="navbar-container">
+        <!-- #section:basics/sidebar.mobile.toggle -->
+        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+          <span class="sr-only">Toggle sidebar</span>
+
+          <span class="icon-bar"></span>
+
+          <span class="icon-bar"></span>
+
+          <span class="icon-bar"></span>
+        </button>
+
+        <!-- /section:basics/sidebar.mobile.toggle -->
+        <div class="navbar-header pull-left">
+          <!-- #section:basics/navbar.layout.brand -->
+          <a href="#" class="navbar-brand">
+            <small>
+              <i class="fa fa-leaf"></i>
+              CRM Application
+            </small>
+          </a>
+
+          <!-- /section:basics/navbar.layout.brand -->
+
+          <!-- #section:basics/navbar.toggle -->
+
+          <!-- /section:basics/navbar.toggle -->
         </div>
+
+        <!-- #section:basics/navbar.dropdown -->
+        <div class="navbar-buttons navbar-header pull-right" role="navigation">
+          <ul class="nav ace-nav">
+              <%=render 'layouts/navigation_links'%>
+            <!-- /section:basics/navbar.user_menu -->
+          </ul>
+        </div>
+
+        <!-- /section:basics/navbar.dropdown -->
+      </div><!-- /.navbar-container -->
+    </div>
+
+    <!-- /section:basics/navbar.layout -->
+    <div class="main-container" id="main-container">
+      <script type="text/javascript">
+        try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+      </script>
+
+      <!-- #section:basics/sidebar -->
+      <div id="sidebar" class="sidebar                  responsive">
+        <script type="text/javascript">
+          try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+        </script>
+
+        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+          <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+            <button class="btn btn-success">
+              <i class="ace-icon fa fa-signal"></i>
+            </button>
+
+            <button class="btn btn-info">
+              <i class="ace-icon fa fa-pencil"></i>
+            </button>
+
+            <!-- #section:basics/sidebar.layout.shortcuts -->
+            <button class="btn btn-warning">
+              <i class="ace-icon fa fa-users"></i>
+            </button>
+
+            <button class="btn btn-danger">
+              <i class="ace-icon fa fa-cogs"></i>
+            </button>
+
+            <!-- /section:basics/sidebar.layout.shortcuts -->
+          </div>
+
+          <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+            <span class="btn btn-success"></span>
+
+            <span class="btn btn-info"></span>
+
+            <span class="btn btn-warning"></span>
+
+            <span class="btn btn-danger"></span>
+          </div>
+        </div><!-- /.sidebar-shortcuts -->
+
+        <ul class="nav nav-list">
+          <li class="active">
+            <a href="/customers">
+              <i class="menu-icon fa fa-tachometer"></i>
+              <span class="menu-text"> Dashboard </span>
+            </a>
+
+            <b class="arrow"></b>
+          </li>
+
+          <li class="">
+            <a href="#" class="dropdown-toggle">
+              <i class="menu-icon fa fa-calendar"></i>
+              <span class="menu-text"> Calender </span>
+
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <!-- <ul class="submenu">
+              <li class="">
+                <a href="#" class="dropdown-toggle">
+                  <i class="menu-icon fa fa-caret-right"></i>
+
+                  Layouts
+                  <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                  <li class="">
+                    <a href="top-menu.html">
+                      <i class="menu-icon fa fa-caret-right"></i>
+                      Top Menu
+                    </a>
+
+                    <b class="arrow"></b>
+                  </li>
+
+                  <li class="">
+                    <a href="mobile-menu-1.html">
+                      <i class="menu-icon fa fa-caret-right"></i>
+                      Default Mobile Menu
+                    </a>
+
+                    <b class="arrow"></b>
+                  </li>
+
+                  <li class="">
+                    <a href="mobile-menu-2.html">
+                      <i class="menu-icon fa fa-caret-right"></i>
+                      Mobile Menu 2
+                    </a>
+
+                    <b class="arrow"></b>
+                  </li>
+
+                  <li class="">
+                    <a href="mobile-menu-3.html">
+                      <i class="menu-icon fa fa-caret-right"></i>
+                      Mobile Menu 3
+                    </a>
+
+                    <b class="arrow"></b>
+                  </li>
+                </ul>
+              </li>
+
+              <li class="">
+                <a href="typography.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Typography
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="elements.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Elements
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="buttons.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Buttons &amp; Icons
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="treeview.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Treeview
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="jquery-ui.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  jQuery UI
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="nestable-list.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Nestable Lists
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="#" class="dropdown-toggle">
+                  <i class="menu-icon fa fa-caret-right"></i>
+
+                  Three Level Menu
+                  <b class="arrow fa fa-angle-down"></b>
+                </a>
+
+                <b class="arrow"></b>
+
+                <ul class="submenu">
+                  <li class="">
+                    <a href="#">
+                      <i class="menu-icon fa fa-leaf green"></i>
+                      Item #1
+                    </a>
+
+                    <b class="arrow"></b>
+                  </li>
+
+                  <li class="">
+                    <a href="#" class="dropdown-toggle">
+                      <i class="menu-icon fa fa-pencil orange"></i>
+
+                      4th level
+                      <b class="arrow fa fa-angle-down"></b>
+                    </a>
+
+                    <b class="arrow"></b>
+
+                    <ul class="submenu">
+                      <li class="">
+                        <a href="#">
+                          <i class="menu-icon fa fa-plus purple"></i>
+                          Add Product
+                        </a>
+
+                        <b class="arrow"></b>
+                      </li>
+
+                      <li class="">
+                        <a href="#">
+                          <i class="menu-icon fa fa-eye pink"></i>
+                          View Products
+                        </a>
+
+                        <b class="arrow"></b>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul> -->
+          </li>
+
+          <li class="active">
+            <a href="#" class="dropdown-toggle">
+              <i class="menu-icon fa fa-list"></i>
+              <span class="menu-text"> Customers </span>
+
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <!-- <ul class="submenu">
+              <li class="">
+                <a href="tables.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Simple &amp; Dynamic
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="jqgrid.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  jqGrid plugin
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+            </ul> -->
+          </li>
+
+          <li class="">
+            <a href="#" class="dropdown-toggle">
+              <i class="menu-icon fa fa-pencil-square-o"></i>
+              <span class="menu-text"> Prospect </span>
+
+              <b class="arrow fa fa-angle-down"></b>
+            </a>
+
+            <b class="arrow"></b>
+
+            <!-- <ul class="submenu">
+              <li class="">
+                <a href="form-elements.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Form Elements
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="form-wizard.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Wizard &amp; Validation
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="wysiwyg.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Wysiwyg &amp; Markdown
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+
+              <li class="">
+                <a href="dropzone.html">
+                  <i class="menu-icon fa fa-caret-right"></i>
+                  Dropzone File Upload
+                </a>
+
+                <b class="arrow"></b>
+              </li>
+            </ul> -->
+          </li>
+
+          <li class="">
+            <a href="#">
+              <i class="menu-icon fa fa-list-alt"></i>
+              <span class="menu-text"> Others </span>
+            </a>
+
+            <b class="arrow"></b>
+          </li>
+
+          
+        </ul><!-- /.nav-list -->
+
+        <!-- #section:basics/sidebar.layout.minimize -->
+        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+          <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+        </div>
+
+        <!-- /section:basics/sidebar.layout.minimize -->
+        <script type="text/javascript">
+          try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+        </script>
       </div>
-  </div>
+
+      <!-- /section:basics/sidebar -->
+      <div class="main-content">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+          <script type="text/javascript">
+            try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+          </script>
+
+          <ul class="breadcrumb">
+            <li>
+              <i class="ace-icon fa fa-home home-icon"></i>
+                <%=link_to "Home",customers_path%>
+            </li>
+
+              <%-if !@customer.nil?%>
+            <li class="active"><%=@customer.name%></li>
+
+              <%end%>
+          </ul><!-- /.breadcrumb -->
+
+          <!-- #section:basics/content.searchbox -->
+          <div class="nav-search" id="nav-search">
+            <form class="form-search">
+              <span class="input-icon">
+                <input type="text" placeholder="Search ..." class="nav-search-input" id="nav-search-input" autocomplete="off" />
+                <i class="ace-icon fa fa-search nav-search-icon"></i>
+              </span>
+            </form>
+          </div><!-- /.nav-search -->
+
+          <!-- /section:basics/content.searchbox -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+          <!-- #section:settings.box -->
+          <div class="ace-settings-container" id="ace-settings-container">
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+              <i class="ace-icon fa fa-cog bigger-150"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix" id="ace-settings-box">
+              <div class="pull-left width-50">
+                <!-- #section:settings.skins -->
+                <div class="ace-settings-item">
+                  <div class="pull-left">
+                    <select id="skin-colorpicker" class="hide">
+                      <option data-skin="no-skin" value="#438EB9">#438EB9</option>
+                      <option data-skin="skin-1" value="#222A2D">#222A2D</option>
+                      <option data-skin="skin-2" value="#C6487E">#C6487E</option>
+                      <option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+                    </select>
+                  </div>
+                  <span>&nbsp; Choose Skin</span>
+                </div>
+
+                <!-- /section:settings.skins -->
+
+                <!-- #section:settings.navbar -->
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+                  <label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+                </div>
+
+                <!-- /section:settings.navbar -->
+
+                <!-- #section:settings.sidebar -->
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+                  <label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+                </div>
+
+                <!-- /section:settings.sidebar -->
+
+                <!-- #section:settings.breadcrumbs -->
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+                  <label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+                </div>
+
+                <!-- /section:settings.breadcrumbs -->
+
+                <!-- #section:settings.rtl -->
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+                  <label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+                </div>
+
+                <!-- /section:settings.rtl -->
+
+                <!-- #section:settings.container -->
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+                  <label class="lbl" for="ace-settings-add-container">
+                    Inside
+                    <b>.container</b>
+                  </label>
+                </div>
+
+                <!-- /section:settings.container -->
+              </div><!-- /.pull-left -->
+
+              <div class="pull-left width-50">
+                <!-- #section:basics/sidebar.options -->
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" />
+                  <label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+                </div>
+
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" />
+                  <label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+                </div>
+
+                <div class="ace-settings-item">
+                  <input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" />
+                  <label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+                </div>
+
+                <!-- /section:basics/sidebar.options -->
+              </div><!-- /.pull-left -->
+            </div><!-- /.ace-settings-box -->
+          </div><!-- /.ace-settings-container -->
+
+          <!-- /section:settings.box -->
+          
+                  
+
+                      
+
+                
+                   
+
 

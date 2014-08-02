@@ -12,6 +12,14 @@
  *
  *= require_tree .
  *= require_self
+ *= require font-awesome.min
+*= require jquery-ui.custom.min.css
+ *= require uncompressed/font-awesome
+ *= require ace-fonts
+ *= require ace.min
+ *= require ace-rtl.min
+ *= require ace-skins.min.css
+ *= require jquery.gritter
  */
 @media (min-width: 768px) {
   .sidebar-nav .navbar .navbar-collapse {
