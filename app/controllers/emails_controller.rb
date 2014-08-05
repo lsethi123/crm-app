@@ -6,8 +6,8 @@ class EmailsController < ApplicationController
   def index
     @customer = Customer.select("id,name").find(params['customer_id'])
     @contacts = Contact.all.where(customer_id:@customer.id)
-    @emails = Email.all.where(customer_id:@customer.id)
-    @notes = Note.all.where(customer_id:@customer.id)
+    @emails = Email.all.order(updated_at: :desc).where(customer_id:@customer.id)
+    @notes = Note.all.order(updated_at: :desc).where(customer_id:@customer.id)
   end
 
   # GET /emails/1
