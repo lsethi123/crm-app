@@ -47,60 +47,55 @@ $(document).ready(function(){
 </script>
 
 <div class="col-sm-4">
-
+  <div class ="margin-10">
+  <%= link_to  new_email_path ,:class=>" btn-padding btn btn-small btn-warning" do%>
+        <span class="glyphicon glyphicon-envelope"></span> New Email
+  <%end%>
+  <%= link_to  new_note_path ,:class=>" btn btn-small btn-danger btn-padding" do%>
+    <span class="glyphicon glyphicon-comment"></span> New Note
+  <%end%>
+</div>
 <table class="table table-bordered table-striped">
   <tr >
-    <td colspan="4" class="active">
+    <td class="active">
       <strong>Emails</strong>
-          <%= link_to  new_email_path ,:class=>" pull-right btn-padding btn btn-small btn-warning" do%>
-        <span class="glyphicon glyphicon-envelope"></span> New Email
-        <%end%>
+    </td>
+    <td class="active">
+      <strong>Date</strong>
     </td>
    <% @emails.each do |e| %>
+   <%-if !e.contact_id.blank? %><%-email_data= Contact.select("email,created_at").find(e.contact_id).email %><%end%>
   <tr  class="header">
-    <td colspan="2" title="Click to Expand"><%-if !e.contact_id.nil? %><%= Contact.select("email").find(e.contact_id).email %><%end%></td>
+    <td  title="Click to Expand"><%=email_data%></td>
+    <td><%=e.created_at%></td>
   </tr>
   <tr  style="display:none">
     <td><%=e.subject%></td>
     <td><%=e.message%></td>
   </tr>
   <%end%>
-</table>
+  <tr>
+    <td class="active">
+      <strong>Notes</strong>
+    </td>
 
-
-
-
-
-
-
-
-<br>
-
-
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr class=" widget-header-small">
-      <th><strong>Note</strong>
-        <span class="pull-right">
-          <%= link_to  new_note_path ,:class=>" btn btn-small btn-danger btn-padding" do%>
-            <span class="glyphicon glyphicon-comment"></span> New Note
-          <%end%>
-        </span>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @notes.each do |note| %>
+    <td class="active">
+      <strong>Date</strong>
+    </td>
+  </tr><% @notes.each do |note| %>
       <tr>
         <td><%= note.note %></td>
-        <!--<td><%= link_to 'Show', note %></td>-->
+        <td><%=note.created_at %></td>
         
       </tr>
     <% end %>
-  </tbody>
 </table>
 
-<br>
+
+
+
+
+
+
 
 </div>
