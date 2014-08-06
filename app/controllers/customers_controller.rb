@@ -4,7 +4,7 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.where(user_id:current_user.id).all
+    @customers = Customer.where(user_id:current_user.id).all unless current_user.nil?
   end
 
   # GET /customers/1
