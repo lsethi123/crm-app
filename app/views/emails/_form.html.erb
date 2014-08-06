@@ -28,13 +28,17 @@ jQuery(function($) {
     <%= f.error_notification %>
 
     <div class="form-group">
-      <%= f.association :customer %><br>
+
+      <%= f.association :customer,
+      collection: Customer.where(user_id:current_user.id).all(order: 'name')%>
+
       Email<br>
       <%= select_tag :contact_id%><br>
       <%= f.input :subject%><br>
 
       Message<br>
       <%= f.text_area :message ,:class=>"message"%>
+      <%= f.hidden_field :user_id, :value => current_user.id%>
     </div>
     <div class="form-group">
       <%= f.button :submit ,:class=>"btn btn-success"%>

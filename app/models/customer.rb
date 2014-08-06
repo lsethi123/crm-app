@@ -2,5 +2,6 @@ class Customer < ActiveRecord::Base
 	has_many :emails
 	has_many :notes
 	has_many :contacts
-	validates_presence_of :name,:address,:city
+	belongs_to :user
+	validates_presence_of :name,:address,:city,:user_id
 end

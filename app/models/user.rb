@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  has_many :customers
+  has_many :contacts
+  has_many :emails
+  has_many :notes
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
 

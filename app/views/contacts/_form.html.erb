@@ -7,7 +7,9 @@
       <%= f.input :company %>
       <%= f.input :phone %>
       <%= f.input :email %>
-      <%= f.association :customer %>
+      <%= f.association :customer,
+      collection: Customer.where(user_id:current_user.id).all(order: 'name')%>
+      <%= f.hidden_field :user_id, :value => current_user.id%>
     </div>
 
     <div class="form-action">
