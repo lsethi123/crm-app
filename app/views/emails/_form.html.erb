@@ -30,7 +30,7 @@ jQuery(function($) {
     <div class="form-group">
 
       <%= f.association :customer,
-      collection: Customer.where(user_id:current_user.id).all(order: 'name')%>
+      collection: Customer.where(user_id:current_user.id).all()%>
 
       Email<br>
       <%= select_tag :contact_id%><br>
