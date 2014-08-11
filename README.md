@@ -12,6 +12,9 @@ This application requires:
 - Ruby 2.1.2
 - Rails 4.1.4
 
+![alt tag](https://github.com/lsethi123/crm-app/blob/master/public/crm_app.png)
+
+![alt tag](https://github.com/lsethi123/crm-app/blob/master/public/crm_app1.png)
 
 Contribution:
 -------
