@@ -1,0 +1,26 @@
+<div class="authform">
+<%= simple_form_for(@prospect,:html => { :role => 'form'}) do |f| %>
+  <%= f.error_notification%>
+
+  <div class="form-group">
+  	<%= f.input :name , :autofocus => true, :class=>'form-control' %>
+  </div>
+  <div class="form-group">
+  	<%= f.input :address , :autofocus => true, :class=> 'form-control' %>
+  </div>
+  <div class="form-group">
+  	<%= f.input :city , :autofocus => true, :class=> 'form-control' %>
+
+    <%= f.hidden_field :user_id, :value => current_user.id%>
+  </div>
+  <div class="form-group">
+    <%=select("post", "stage_id", Stage.all.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Stage'}, :selected => "1")%>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit,:class=>"btn btn-success" %>
+    <%= link_to 'Back', customers_path ,:class=>"btn btn-primary"%>
+  </div>
+<% end %>
+</div>

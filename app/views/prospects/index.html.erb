@@ -1,0 +1,105 @@
+<style type="text/css">
+.header{
+  width: 44px;
+}
+
+.stages ul{
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+  height: 45px;
+  margin: 0px;
+}
+.stages li{
+  display: table-cell;
+  text-align: left;
+  overflow: visible;
+  vertical-align: middle;
+  text-shadow: 0 1px 0 white;
+  border-right: 1px solid #CCC;
+  padding: 6px 20px 6px 12px;
+}
+div .stage {
+  display: table-cell;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=64)";
+  filter: alpha(opacity=64);
+  -moz-opacity: 0.64;
+  -khtml-opacity: 0.64;
+  opacity: 0.64;
+  border-right: 1px #d8d0d0 solid;
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+div .dealsTable {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+span .dropZone {
+  border-style: dotted;
+  border-color: red;
+  display: inline;
+}
+.prospectCity {
+
+}
+
+</style>
+
+
+<%-if user_signed_in?%>
+
+<div class="top-padding-10">
+  <span>
+    <%= link_to  new_prospect_path, :class=>"btn btn-success btn-padding" do%>
+    <span class="glyphicon glyphicon-user"></span> New Prospect
+    <%end%>
+  </span>
+  <div class = "dropZone">
+
+  </div>
+</div>
+<div>
+  <table class="table table-bordered ">
+    <tbody>
+      <tr class = "header">
+        <td>
+          <div class = "stages">
+            <ul>
+              <% @stages.each do |stage|%>
+                <li data-stage-id = "<%= stage.id%>"><%= stage.name%></li>
+              <% end %>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="container">
+          <div class="dealsTable">
+            <% @prospects.each do |prospect| %>
+                <div class = "stage" data-stage-id = "<%=prospect.stage_id%>">
+                <p>
+                  <strong><%=prospect.name%></strong>
+                </p>
+                <span class = "precpestCity"><small><%=prospect.name%></small></span>
+
+                </div>
+             <%end%>
+
+          </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<%else%>
+<div class="jumbotron">
+      <div class="container">
+        <h1>Getting started</h1>
+        <p>Customer Restaionship Management</p>
+
+      </div>
+    </div>
+<%end%>

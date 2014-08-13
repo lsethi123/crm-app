@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :emails
 
   resources :customers
+  
+  resources :prospects
 
   root to: 'customers#index'
   devise_for :users
