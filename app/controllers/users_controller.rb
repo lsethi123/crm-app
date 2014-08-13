@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+#protect_from_forgery except: :sign_in
   before_filter :authenticate_user!
   after_action :verify_authorized
 
