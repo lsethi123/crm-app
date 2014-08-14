@@ -1,0 +1,6 @@
+<tr>
+        <td><%= stage.name %></td>
+        <td><%= link_to 'Show', stage,  :class=>"btn btn-success btn-padding"%></td>
+        <td><%= link_to 'Edit', edit_stage_path(stage),  :class=>"btn btn-warning btn-padding"%></td>
+        <td><%= link_to 'Destroy', stage, method: :delete, data: { confirm: 'Are you sure?' },  :class=>"btn btn-danger btn-padding"%></td>
+      </tr>

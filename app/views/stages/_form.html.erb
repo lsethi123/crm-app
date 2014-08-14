@@ -1,0 +1,17 @@
+
+<div class="col-md-6 col-md-offset-3">
+<%= simple_form_for(@stage) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+
+    <%= f.hidden_field :user_id, :value => current_user.id%>
+  </div>
+<br>
+  <div class="form-actions">
+    <%= f.button :submit,class:"btn btn-success" %>
+  <%= link_to 'Back', stages_path,:class=>"btn btn-primary" %>
+  </div>
+<% end %>
+</div>

@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  get 'stages/new'
+
+  get 'stages/create'
+
+  get 'stages/update'
+
+  get 'stages/edit'
+
+  get 'stages/destroy'
+
+  get 'stages/index'
+
+  get 'stages/show'
+
   resources :contacts
 
   resources :notes
@@ -6,8 +20,9 @@ Rails.application.routes.draw do
   resources :emails
 
   resources :customers
-  
+
   resources :prospects
+  resources :stages
 
   root to: 'customers#index'
   devise_for :users
