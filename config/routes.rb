@@ -20,8 +20,10 @@ Rails.application.routes.draw do
   resources :emails
 
   resources :customers
-
+  match '/ajax/stage', :to => "prospects#ajax", :via => [:post]
+  match '/ajax/drop', :to => "prospects#drop", :via => [:post]
   resources :prospects
+
   resources :stages
 
   root to: 'customers#index'

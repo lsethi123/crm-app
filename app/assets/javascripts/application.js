@@ -16,6 +16,7 @@
  //= require turbolinks
  //= require_tree .
  //= require bootstrap.min
+//= require bootstrap-sprockets
  //= require typeahead.jquery.min
  //= require jquery.validate.min
  //= require additional-methods.min

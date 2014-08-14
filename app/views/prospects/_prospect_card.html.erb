@@ -1,6 +1,9 @@
-<div class = "procpectCard placeable" data-stage-id = "<%=prospect.stage_id%>">
-  <div class = "card">
-    <span class = "name"><%=prospect.name%></span>
-    <span class = "city"><%=prospect.city%></span>
+<div class = "procpectCard placeable " data-stage-id = "<%=prospect.stage_id%>" data-id = "<%=prospect.id%>">
+  <div class = "card bg-success">
+    <span class = "name"><%= link_to prospect.name, prospect%></span> from
+    <span class = "city"><%=prospect.city%></span></br>
+    <%= link_to '', edit_prospect_path(prospect),  :class=>"glyphicon glyphicon-cog buttons"%>
+    <%= link_to '', prospect, method: :delete, data: { confirm: 'Are you sure?' },  :class=>"glyphicon glyphicon-trash buttons"%>
+
   </div>
 </div>

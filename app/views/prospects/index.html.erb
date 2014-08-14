@@ -3,23 +3,45 @@
   width: 44px;
 }
 
-span .dropZone {
-  border-style: dotted;
-  border-color: red;
-  display: inline;
+.buttons {
+  opacity: 0.2;
+  text-decoration: none;
 }
+.buttons:hover{
+  opacity: 1;
+  text-decoration: none;
+}
+.dropZone {
+  width:90%;
+  height:90%;
+  margin: 0 auto
+  -moz-border-radius: 50px;
+-webkit-border-radius: 50px;
+border-radius: 50px;
+-moz-box-shadow: 0px 0px 6px #000000;
+-webkit-box-shadow: 0px 0px 6px #000000;
+box-shadow: 0px 0px 6px #000000;
+display: inline-block;
+
+}
+.dropWraper {
+  width: 100%;
+  height: 200px;
+  text-align: center;
+}
+
 
 .tableRow {
   display: table-row;
 }
+
 .card {
   word-wrap: break-word;
 
   margin: 0px;
   width: 100px;
   height: 60px;
-  border: 1px #000000 solid;
-  background-color: #ebeaea;
+  border: 1px gray solid;
 }
 .tableContainer {
   width:100%;
@@ -30,7 +52,6 @@ span .dropZone {
 
 
 <%-if user_signed_in?%>
-
 <div class="top-padding-10">
   <span>
     <%= link_to  new_prospect_path, :class=>"btn btn-success btn-padding" do%>
@@ -47,11 +68,11 @@ span .dropZone {
     <span class="glyphicon glyphicon-tasks"></span> Manage Stages
     <%end%>
   </span>
-  <div class = "dropZone">
+  <!--<%= link_to 'Link', new_prospect_path, :remote => true %>-->
 
-  </div>
 </div>
-<div style="">
+<%= hidden_field_tag 'userId', current_user.id%>
+<div style="display:none">
   <%@prospects.each do |prospect|%>
     <%=render :partial => 'prospect_card', :locals => {:prospect => prospect}%>
   <%end%>
@@ -64,6 +85,7 @@ span .dropZone {
         <% @stages.each do |stage|%>
           <th data-stage-id = "<%= stage.id%>"><%= stage.name%></th>
         <% end %>
+        <th data-drop-zone = 1> Convert to Client</th>
       </tr>
     </thead>
     <tbody>
@@ -71,10 +93,12 @@ span .dropZone {
       <% @stages.each do |stage|%>
           <td class = "stageRow" data-stage-id = "<%= stage.id%>" style = "align:center"></td>
       <% end %>
+          <td class = "stageRow" data-drop-zone = 1></td>
       </tr>
     </tbody>
   </table>
 </div>
+
 <%else%>
 <div class="jumbotron">
       <div class="container">
