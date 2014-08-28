@@ -1,5 +1,5 @@
 <div class = "procpectCard placeable " data-stage-id = "<%=prospect.stage_id%>" data-id = "<%=prospect.id%>">
-  <div class = "card bg-success">
+  <div class = "card">
     <span class = "name"><%= link_to prospect.name, prospect%></span> from
     <span class = "city"><%=prospect.city%></span></br>
     <%= link_to '', edit_prospect_path(prospect),  :class=>"glyphicon glyphicon-cog buttons"%>

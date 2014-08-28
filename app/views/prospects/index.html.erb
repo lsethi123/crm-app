@@ -35,13 +35,23 @@ display: inline-block;
   display: table-row;
 }
 
-.card {
-  word-wrap: break-word;
+.draggin {
+-webkit-transform: translate(-1px, 1px) rotate(4deg) skew(-10deg, 5deg) scale(1, 0.8);
+-moz-transform: translate(-1px, 1px) rotate(4deg) skew(-10deg, 5deg) scale(1, 0.8);
+-o-transform: translate(-1px, 1px) rotate(4deg) skew(-10deg, 5deg) scale(1, 0.8);
+-ms-transform: translate(-1px, 1px) rotate(4deg) skew(-10deg, 5deg) scale(1, 0.8);
+transform: translate(-1px, 1px) rotate(4deg) skew(-10deg, 5deg) scale(1, 0.8);
 
-  margin: 0px;
+}
+.card {
+  margin: 0 auto;
+  word-wrap: break-word;
+  margin-top: 5px;
+  margin-bottom: 5px;
   width: 100px;
   height: 60px;
-  border: 1px gray solid;
+  border: 1px #DDD solid;
+  background: linear-gradient(to bottom, #F8F8F8 0px, #ECECEC 100%) repeat-x scroll 0% 0% #F2F2F2;
 }
 .tableContainer {
   width:100%;

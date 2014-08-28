@@ -13,7 +13,6 @@
 //= require jquery
  //= require jquery_ujs
  //= require jquery.gritter.min
- //= require turbolinks
  //= require_tree .
  //= require bootstrap.min
 //= require bootstrap-sprockets
