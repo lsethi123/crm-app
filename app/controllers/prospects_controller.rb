@@ -6,10 +6,17 @@ class ProspectsController < ApplicationController
   # GET /prospects.json
   def index
     @prospects = Prospect.all
+    @prospects.each{|prospect|
+      stage_id = set_stage(prospect.due_date)
+      prospect.update(:stage_id=>stage_id)
+    }
     @stages = Stage.all
 
   end
-
+  def cal
+    @prospects = Prospect.all
+    pp @prospects
+  end
   def ajax
     respond_to do |format|
       if @prospect.update(:stage_id => params[:stage_id])
@@ -53,9 +60,11 @@ class ProspectsController < ApplicationController
 
   # POST /prospects
   # POST /prospects.json
+
   def create
     @prospect = Prospect.new(prospect_params)
-
+    stage_id = set_stage(@prospect.due_date)
+    @prospect.stage_id =stage_id
     respond_to do |format|
       if @prospect.save
         format.html { redirect_to prospects_url, notice: 'Prospect was successfully created.' }
@@ -70,9 +79,11 @@ class ProspectsController < ApplicationController
   # PATCH/PUT /prospects/1
   # PATCH/PUT /prospects/1.json
   def update
-
     respond_to do |format|
       if @prospect.update(prospect_params)
+        stage_id =set_stage(@prospect.due_date)
+        @prospect.stage_id = stage_id
+        @prospect.save
         if params[:ajax]=="1"
           format.js { render nothing: true }
         else
@@ -104,6 +115,23 @@ class ProspectsController < ApplicationController
     end
     def get_stages
       @stages = Stage.all
+    end
+    def set_stage(due_date)
+      stages = get_stages
+      stage_hash = stages.collect {|p| [ p.name, p.id ] }.to_h
+      current_time = DateTime.now.utc
+      time_diff = (due_date - current_time).to_i
+      pp "timediff #{time_diff}"
+      if time_diff < 0
+        stage = stage_hash['Overdue']
+      elsif (time_diff > 1 && time_diff < 86400)
+        stage = stage_hash['Today']
+      elsif (time_diff >86401 && time_diff < 172800)
+        stage = stage_hash['Tomorrow,']
+      else
+        stage = stage_hash['SomeTime']
+      end
+        stage
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def prospect_params
