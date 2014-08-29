@@ -15,7 +15,6 @@ class ProspectsController < ApplicationController
   end
   def cal
     @prospects = Prospect.all
-    pp @prospects
   end
   def ajax
     respond_to do |format|
@@ -118,7 +117,7 @@ class ProspectsController < ApplicationController
     end
     def set_stage(due_date)
       stages = get_stages
-      stage_hash = stages.collect {|p| [ p.name, p.id ] }.to_h
+      stage_hash = Hash[*stages.collect {|p| [ p.name, p.id ] }.flatten]
       current_time = DateTime.now.utc
       time_diff = (due_date - current_time).to_i
       pp "timediff #{time_diff}"
