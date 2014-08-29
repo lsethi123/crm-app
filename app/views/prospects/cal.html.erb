@@ -1,0 +1,216 @@
+<%-if user_signed_in?%>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+jQuery(function($) {
+
+/* initialize the external events
+-----------------------------------------------------------------*/
+
+$('#external-events div.external-event').each(function() {
+
+    // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+    // it doesn't need to have a start or end
+    var eventObject = {
+      title: $.trim($(this).text()) // use the element's text as the event title
+    };
+
+    // store the Event Object in the DOM element so we can get to it later
+    $(this).data('eventObject', eventObject);
+
+    // make the event draggable using jQuery UI
+    $(this).draggable({
+      zIndex: 999,
+      revert: true,      // will cause the event to go back to its
+      revertDuration: 0  //  original position after the drag
+    });
+    
+  });
+
+
+
+
+  /* initialize the calendar
+  -----------------------------------------------------------------*/
+
+  var date = new Date();
+  var d = date.getDate();
+  var m = date.getMonth();
+  var y = date.getFullYear();
+
+  var updateProspect;  
+  var calendar = $('#calendar').fullCalendar({
+    //isRTL: true,
+    buttonHtml: {
+      prev: '<i class="ace-icon fa fa-chevron-left"></i>',
+      next: '<i class="ace-icon fa fa-chevron-right"></i>'
+    },
+
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
+    events: '/prospects/cal.json'
+    ,
+    
+    editable: true,
+    eventDrop: function(event, delta, revertFunc) {
+
+        //alert(event.title + " was dropped on " + event.start.format());
+        if (!confirm("Are you sure about this change?")) {
+
+          revertFunc();
+        }
+        else{
+          $.ajax({
+            type:"PUT",
+            url: "/prospects/"+event.id,
+            data: {prospect:{due_date:event.start.format()},ajax:1}
+
+          });
+        }
+
+
+      },
+    droppable: true, // this allows things to be dropped onto the calendar !!!
+    drop: function(date, allDay) { // this function is called when something is dropped
+
+      // retrieve the dropped element's stored Event Object
+      var originalEventObject = $(this).data('eventObject');
+      var $extraEventClass = $(this).attr('data-class');
+      
+      
+      // we need to copy it, so that multiple events don't have a reference to the same object
+      var copiedEventObject = $.extend({}, originalEventObject);
+      
+      // assign it the date that was reported
+      copiedEventObject.start = date;
+      copiedEventObject.allDay = allDay;
+      if($extraEventClass) copiedEventObject['className'] = [$extraEventClass];
+      
+      // render the event on the calendar
+      // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+      $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+      
+      // is the "remove after drop" checkbox checked?
+      if ($('#drop-remove').is(':checked')) {
+        // if so, remove the element from the "Draggable Events" list
+        $(this).remove();
+      }
+      
+    }
+    ,
+    selectable: true,
+    selectHelper: true,
+    select: function(start, end, allDay) {
+
+      // bootbox.prompt("New Event Title:", function(title) {
+      //   if (title !== null) {
+      //     calendar.fullCalendar('renderEvent',
+      //       {
+      //         title: title,
+      //         start: start,
+      //         end: end,
+      //         allDay: allDay
+      //       },
+      //       true // make the event "stick"
+      //     );
+      //   }
+      // });
+
+
+      //calendar.fullCalendar('unselect');
+    }
+    ,
+    eventClick: function(calEvent, jsEvent, view) {
+
+      //display a modal
+        //display a modal
+        var edit_url = "/prospects/"+calEvent.id+"/edit";
+        var delete_url = "/prospects/"+calEvent.id;
+        var modal = 
+        '<div class="modal fade">\
+        <div class="modal-dialog">\
+        <div class="modal-content">\
+        <div class="modal-body">\
+        <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
+        <form class="no-margin" action="">\
+        <label>Customer Name & city &nbsp;</label>\
+        <input readonly ="readonly" class="middle input-large" autocomplete="off" type="text" value="' + calEvent.title + '" />\
+        <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Convert to Client</button>\
+        </form>\
+        </div>\
+        <div class="modal-footer">\
+        <a href="'+edit_url+'" class="btn btn-sm btn-warning" data-action="edit"><i class="ace-icon fa fa-pencil-square-o"></i> Edit</a>\
+        <a class="btn btn-sm btn-danger"  data-method="delete" href="'+delete_url+'" rel="nofollow"><i class="ace-icon fa fa-trash-o"></i>Delete</a>\
+        <button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>\
+        </div>\
+        </div>\
+        </div>\
+        </div>';
+
+
+        var modal = $(modal).appendTo('body');
+        modal.find('form').on('submit', function(ev){
+          ev.preventDefault();
+
+          calEvent.title = $(this).find("input[type=text]").val();
+          calendar.fullCalendar('updateEvent', calEvent);
+          console.log("calEvent",calEvent);
+          $.ajax({
+            type:"POST",
+            url: "/ajax/drop",
+            data: {id:calEvent.id,ajax:1}
+
+          });
+          calendar.fullCalendar('removeEvents' , function(ev){
+            return (ev._id == calEvent._id);
+          })
+          modal.modal("hide");
+        });
+        modal.find('button[data-action=delete]').on('click', function() {
+          calendar.fullCalendar('removeEvents' , function(ev){
+            $.ajax({
+              type:"DELETE",
+              url: "/prospect/"+calEvent.id,
+              data: {id:calEvent.id}
+            });
+            return (ev._id == calEvent._id);
+          })
+          modal.modal("hide");
+        });
+
+        modal.modal('show').on('hidden', function(){
+          modal.remove();
+        });
+
+      // console.log(calEvent.id);
+      // console.log(jsEvent);
+      // console.log(view);
+
+      // change the border color just for fun
+      //$(this).css('border-color', 'red');
+
+    }
+    
+  });
+
+})
+</script>
+  
+  <div class="col-sm-10">
+    <div class="space"></div>
+
+<!-- #section:plugins/data-time.calendar -->
+  <div id="calendar"></div>
+</div>
+<!-- /section:plugins/data-time.calendar -->
+<%else%>\
+<div class="jumbotron">
+  <div class="container">
+    <h1>Getting started</h1>
+    <p>Customer Restaionship Management</p>
+
+  </div>
+</div>
+<%end%>

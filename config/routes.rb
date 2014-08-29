@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get 'stages/show'
 
+  get 'prospects/cal'
+
   resources :contacts
 
   resources :notes
