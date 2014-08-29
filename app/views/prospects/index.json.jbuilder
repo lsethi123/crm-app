@@ -8,5 +8,4 @@ json.array!(@prospects) do |prospect|
   json.title (prospect.name) +" From " + prospect.city
   json.start prospect.due_date
   json.end prospect.due_date
-  json.url edit_prospect_path(prospect)
 end

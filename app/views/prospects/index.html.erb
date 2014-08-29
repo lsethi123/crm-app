@@ -160,32 +160,88 @@ transform: translate(-1px, 1px) rotate(4deg) skew(-10deg, 5deg) scale(1, 0.8);
       
     }
     ,
-    selectable: false,
+    selectable: true,
     selectHelper: true,
     select: function(start, end, allDay) {
       
-      bootbox.prompt("New Event Title:", function(title) {
-        if (title !== null) {
-          calendar.fullCalendar('renderEvent',
-            {
-              title: title,
-              start: start,
-              end: end,
-              allDay: allDay
-            },
-            true // make the event "stick"
-          );
-        }
-      });
+      // bootbox.prompt("New Event Title:", function(title) {
+      //   if (title !== null) {
+      //     calendar.fullCalendar('renderEvent',
+      //       {
+      //         title: title,
+      //         start: start,
+      //         end: end,
+      //         allDay: allDay
+      //       },
+      //       true // make the event "stick"
+      //     );
+      //   }
+      // });
       
 
-      calendar.fullCalendar('unselect');
+      //calendar.fullCalendar('unselect');
     }
     ,
     eventClick: function(calEvent, jsEvent, view) {
 
       //display a modal
+        //display a modal
+      var edit_url = "/prospects/"+calEvent.id+"/edit";
+      var modal = 
+      '<div class="modal fade">\
+        <div class="modal-dialog">\
+         <div class="modal-content">\
+         <div class="modal-body">\
+           <button type="button" class="close" data-dismiss="modal" style="margin-top:-10px;">&times;</button>\
+           <form class="no-margin" action="">\
+            <label>Customer Name & city &nbsp;</label>\
+            <input readonly ="readonly" class="middle input-large" autocomplete="off" type="text" value="' + calEvent.title + '" />\
+           <button type="submit" class="btn btn-sm btn-success"><i class="ace-icon fa fa-check"></i> Done</button>\
+           </form>\
+         </div>\
+         <div class="modal-footer">\
+          <a href="'+edit_url+'" class="btn btn-sm btn-warning" data-action="edit"><i class="ace-icon fa fa-pencil-square-o"></i> Edit</a>\
+          <button type="button" class="btn btn-sm btn-danger" data-action="delete"><i class="ace-icon fa fa-trash-o"></i> Delete</button>\
+          <button type="button" class="btn btn-sm" data-dismiss="modal"><i class="ace-icon fa fa-times"></i> Cancel</button>\
+         </div>\
+        </div>\
+       </div>\
+      </div>';
+    
+    
+      var modal = $(modal).appendTo('body');
+      modal.find('form').on('submit', function(ev){
+        ev.preventDefault();
+
+        calEvent.title = $(this).find("input[type=text]").val();
+        calendar.fullCalendar('updateEvent', calEvent);
+        console.log("calEvent",calEvent);
+        $.ajax({
+            type:"POST",
+            url: "/ajax/drop",
+            data: {id:calEvent.id,ajax:1}
+         
+          });
+        calendar.fullCalendar('removeEvents' , function(ev){
+          return (ev._id == calEvent._id);
+        })
+        modal.modal("hide");
+      });
+      modal.find('button[data-action=delete]').on('click', function() {
+        calendar.fullCalendar('removeEvents' , function(ev){
+          $.ajax({
+            type:"DELETE",
+            url: "/prospect/"+calEvent.id
+         
+          });
+          return (ev._id == calEvent._id);
+        })
+        modal.modal("hide");
+      });
       
+      modal.modal('show').on('hidden', function(){
+        modal.remove();
+      });
     
     
       

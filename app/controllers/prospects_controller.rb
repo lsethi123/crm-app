@@ -24,7 +24,7 @@ class ProspectsController < ApplicationController
     client.name = @prospect.name
     client.address = @prospect.address
     client.city = @prospect.city
-    client.user_id = params[:user_id].to_i
+    client.user_id = current_user.id
     respond_to do |format|
       if client.save
         @prospect.destroy
