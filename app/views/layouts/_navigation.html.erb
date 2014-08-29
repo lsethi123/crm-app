@@ -2,6 +2,13 @@
     <!-- #section:basics/navbar.layout -->
     <div id="navbar" class="navbar navbar-default">
       <script type="text/javascript">
+        $(function(){
+          $('.nav-list').on('click', 'li', function() {
+            console.log($('.nav-list li.active'));
+            $('.nav-list li.active').removeClass('active');
+            $(this).addClass('active');
+          });
+        });
         try{ace.settings.check('navbar' , 'fixed')}catch(e){}
       </script>
 
@@ -92,22 +99,17 @@
         </div><!-- /.sidebar-shortcuts -->
 
         <ul class="nav nav-list">
-          <li class="active">
-            <a href="/customers">
-              <i class="menu-icon fa fa-tachometer"></i>
-              <span class="menu-text"> Dashboard </span>
-            </a>
+          <%=nav_link  '#' do%>
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text"> Dashboard </span>
 
-            <b class="arrow"></b>
-          </li>
+          <b class="arrow"></b>
+          <%end%>
 
-          <li class="">
-            <a href="#" class="dropdown-toggle">
-              <i class="menu-icon fa fa-calendar"></i>
-              <span class="menu-text"> Calender </span>
+          <%=nav_link  '#' do%>
+            <i class="menu-icon fa fa-calendar"></i>
+            <span class="menu-text"> Calender </span>
 
-              <b class="arrow fa fa-angle-down"></b>
-            </a>
 
             <b class="arrow"></b>
 
@@ -268,18 +270,15 @@
                 </ul>
               </li>
             </ul> -->
-          </li>
+          <%end%>
 
-          <li class="active">
-            <a href="#" class="dropdown-toggle">
-              <i class="menu-icon fa fa-list"></i>
+          
+          <%=nav_link customers_path do%>
+              <i class="menu-icon glyphicon glyphicon-tasks"></i>
               <span class="menu-text"> Customers </span>
 
-              <b class="arrow fa fa-angle-down"></b>
-            </a>
-
             <b class="arrow"></b>
-
+          <%end%>
             <!-- <ul class="submenu">
               <li class="">
                 <a href="tables.html">
@@ -300,12 +299,9 @@
               </li>
             </ul> -->
           </li>
-
-          <li class="">
-            <a href="<%=prospects_path%>">
+          <%=nav_link prospects_path do%>
               <i class="menu-icon fa fa-pencil-square-o"></i>
               <span class="menu-text"> Tasks </span>
-            </a>
 
             <b class="arrow"></b>
 
@@ -346,7 +342,7 @@
                 <b class="arrow"></b>
               </li>
             </ul> -->
-          </li>
+          <%end%>
 
           <li class="">
             <a href="#">

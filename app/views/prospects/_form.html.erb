@@ -4,26 +4,26 @@
   <%= f.error_notification%>
 
   <div class="form-group">
-  	<%= f.input :name , :autofocus => true, :class=>'form-control' %>
+  	<%= f.input :name , :autofocus => true, :class=>'form-control' ,:display=> 'block' %>
   </div>
   <div class="form-group">
-  	<%= f.input :address , :autofocus => true, :class=> 'form-control' %>
+  	<%= f.input :address , :autofocus => true, :class=> 'form-control',:display=> 'block'%>
   </div>
   <div class="form-group">
-  	<%= f.input :city , :autofocus => true, :class=> 'form-control' %>
+  	<%= f.input :city , :autofocus => true, :class=> 'form-control' ,:display=> 'block'%>
 
     <%= f.hidden_field :user_id, :value => current_user.id%>
   </div>
 
   <div class="form-group">
 
-    <%= f.input :due_date , :autofocus => true, :class=> 'form-control' %>
+    <%= f.input :due_date , :autofocus => true, :class=> 'form-control' ,:display=> 'inline'%>
 
   </div>
-  <!-- <div class="form-group">
-    <#%=select("prospect", "stage_id", @stages.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Stage'})%>
+  <div class="form-group">
+    <%=select("prospect", "stage_id", @stages.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Stage'})%>
 
-  </div> -->
+  </div>
 
   <div class="form-actions">
     <%= f.button :submit,:class=>"btn btn-success",:value=>"Save" %>
