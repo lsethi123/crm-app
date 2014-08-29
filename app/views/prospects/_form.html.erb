@@ -1,3 +1,4 @@
+
 <div class="authform">
 <%= simple_form_for(@prospect,:html => { :role => 'form'}) do |f| %>
   <%= f.error_notification%>
@@ -13,14 +14,20 @@
 
     <%= f.hidden_field :user_id, :value => current_user.id%>
   </div>
+
   <div class="form-group">
-    <%=select("prospect", "stage_id", @stages.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Stage'})%>
+
+    <%= f.input :due_date , :autofocus => true, :class=> 'form-control' %>
 
   </div>
+  <!-- <div class="form-group">
+    <#%=select("prospect", "stage_id", @stages.collect {|p| [ p.name, p.id ] }, {prompt: 'Select Stage'})%>
+
+  </div> -->
 
   <div class="form-actions">
-    <%= f.button :submit,:class=>"btn btn-success" %>
-    <%= link_to 'Back', customers_path ,:class=>"btn btn-primary"%>
+    <%= f.button :submit,:class=>"btn btn-success",:value=>"Save" %>
+    <%= link_to 'Back', prospects_path ,:class=>"btn btn-primary"%>
   </div>
 <% end %>
 </div>

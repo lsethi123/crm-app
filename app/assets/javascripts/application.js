@@ -42,3 +42,6 @@
  //=require jquery.mobile.custom.min.js
  //=require jquery.ui.touch-punch.min.js
  //=requrire ace-elements.min.js
+ //=require date-time/moment.min.js
+ //=require fullcalendar.min.js
+ //=require date-time/bootstrap-datepicker.min.js

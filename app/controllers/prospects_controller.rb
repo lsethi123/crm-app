@@ -70,10 +70,16 @@ class ProspectsController < ApplicationController
   # PATCH/PUT /prospects/1
   # PATCH/PUT /prospects/1.json
   def update
+
     respond_to do |format|
       if @prospect.update(prospect_params)
-        format.html { redirect_to prospects_url, notice: 'Prospect was successfully updated.' }
-        format.json { render :show, status: :ok, location: @prospect }
+        if params[:ajax]=="1"
+          format.js { render nothing: true }
+        else
+
+          format.html { redirect_to prospects_url, notice: 'Prospect was successfully updated.' }
+          format.json { render :show, status: :ok, location: @prospect }
+        end
       else
         format.html { render :edit }
         format.json { render json: @prospect.errors, status: :unprocessable_entity }
@@ -101,6 +107,6 @@ class ProspectsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def prospect_params
-      params.require(:prospect).permit(:name, :address,:city,:stage_id)
+      params.require(:prospect).permit(:name, :address,:city,:stage_id,:due_date,:user_id)
     end
 end
