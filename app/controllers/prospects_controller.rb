@@ -17,8 +17,22 @@ class ProspectsController < ApplicationController
     @prospects = Prospect.all
   end
   def ajax
+    ### based on the stage change the due date
+    stages = get_stages
+    stage_hash = Hash[*stages.collect {|p| [ p.id, p.name ] }.flatten]
+    stage_name = stage_hash[params[:stage_id].to_i] 
+    if stage_name == "Today"
+      due_date = DateTime.now
+    elsif stage_name =="Tomorrow"
+      due_date = DateTime.now.tomorrow
+    elsif stage_name == "SomeTime"
+      due_date = DateTime.now.advance(:days=>Random.rand(1..30))
+    else
+      due_date = DateTime.now.advance(:days=>-(Random.rand(1..30)))
+    end
+      
     respond_to do |format|
-      if @prospect.update(:stage_id => params[:stage_id])
+      if @prospect.update(:stage_id => params[:stage_id],:due_date=>due_date)
         format.js { render nothing: true }
       end
     end
@@ -118,15 +132,14 @@ class ProspectsController < ApplicationController
     def set_stage(due_date)
       stages = get_stages
       stage_hash = Hash[*stages.collect {|p| [ p.name, p.id ] }.flatten]
-      current_time = DateTime.now.utc
-      time_diff = (due_date - current_time).to_i
-      pp "timediff #{time_diff}"
-      if time_diff < 0
+      current_date = Date.today.strftime("%Y-%m-%d")
+      due_date_str = "#{due_date.to_date}"
+      if due_date_str < current_date
         stage = stage_hash['Overdue']
-      elsif (time_diff > 1 && time_diff < 86400)
+      elsif (current_date == due_date_str )
         stage = stage_hash['Today']
-      elsif (time_diff >86401 && time_diff < 172800)
-        stage = stage_hash['Tomorrow,']
+      elsif (due_date_str == Date.tomorrow.strftime("%Y-%m-%d"))
+        stage = stage_hash['Tomorrow']
       else
         stage = stage_hash['SomeTime']
       end

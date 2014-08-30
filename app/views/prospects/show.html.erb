@@ -14,6 +14,10 @@
   <strong>City:</strong>
   <%= @prospect.city %>
 </p>
+<p>
+  <strong>Due Date:</strong>
+  <%= @prospect.due_date %>
+</p>
 
-<%= link_to 'Edit', edit_prospect_path(@prospect),:class=>"btn btn-warning" %> |
-<%= link_to 'Back', prospect_path ,:class=>"btn btn-sucess"%>
+<%= link_to 'Edit', edit_prospect_path(@prospect),:class=>"btn btn-warning" %>
+<%= link_to 'Back', prospects_path ,:class=>"btn btn-sucess"%>
