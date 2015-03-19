@@ -18,4 +18,8 @@ This application requires:
 
 Contribution:
 -------
-Lalit Sethi
+Lalit Sethi 
+
+<script data-gratipay-username="lalitsethi2003"
+  data-gratipay-widget="button"
+  src="//grtp.co/v1.js"></script>
